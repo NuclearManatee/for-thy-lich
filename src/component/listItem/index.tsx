@@ -6,13 +6,11 @@ import Question from './Question';
 import FinalQuestion from './FinalQuestion';
 
 export default function ListItem({ listItem }) {
-  switch (listItem.type) {
+  switch (listItem[0].type) {
+    case 'rules':
+      return <Intro item={listItem[0]} />;
     case 'intro':
-      return (
-        <>
-          <Intro item={listItem} />
-        </>
-      );
+      return <Intro item={listItem[0]} />;
     case 'truth':
       return <Truth item={listItem} />;
     case 'chooseYourName':

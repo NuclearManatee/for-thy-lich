@@ -2,11 +2,10 @@ import * as React from 'react';
 
 import { createContext, useState } from 'react';
 export const GamesContext = createContext(null);
-export const GamesDispatchContext = createContext(null);
 
 export function GameProvider({ children }) {
   const [gameItems, setGameItems] = useState([
-    itemStructure.rules.find((item) => (item.id = 0)),
+    itemStructure.rules.filter((item) => item.id == 0),
   ]);
 
   function addGameItem(gameItem) {
@@ -26,17 +25,17 @@ export function GameProvider({ children }) {
   );
 }
 
-const itemStructure = {
+export const itemStructure = {
   rules: [
     {
       id: 0,
       type: 'rules',
       text: 'Read the Intro at loud.',
-      helpText: 'Tap on the screen to proceed.',
+      helpText: 'Tap on the last box to proceed.',
       next: 'intro',
     },
     {
-      id: 0,
+      id: 1,
       type: 'rules',
       text: 'Then choose your Truths from the corresponding sheet among the presented options to paint up the broad strokes of your world.',
       next: 'truth',
