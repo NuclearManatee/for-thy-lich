@@ -1,64 +1,52 @@
 import * as React from 'react';
 
 import { createContext, useState } from 'react';
+import itemStructure from './itemStructure';
+
 export const GamesContext = createContext(null);
 
 export function GameProvider({ children }) {
   const [gameItems, setGameItems] = useState([
-    itemStructure.rules.filter((item) => item.id == 0),
+    itemStructure.rules.filter((item) => item.id == 0)[0],
   ]);
 
-  function addGameItem(gameItem) {
-    const newItem = {
-      id: gameItems.length,
-      text: 'New Item',
-      done: false,
-    };
+  const [truths, setTruths] = useState([]);
 
-    setGameItems((prevList) => [...prevList, newItem]);
+  function next(item) {
+    console.log('clicked');
+
+    const nextIndex = gameItems.filter(
+      (thisItem) => thisItem.type == item.next
+    ).length;
+
+    const toInsert =
+      itemStructure[item.next].filter((thisItem) => thisItem.id == nextIndex)
+        .length > 0
+        ? itemStructure[item.next].filter(
+            (thisItem) => thisItem.id == nextIndex
+          )[0]
+        : null;
+
+    if (toInsert) {
+      setGameItems((prevList) => [...prevList, toInsert]);
+    } else {
+      return;
+    }
   }
 
-  const values = { gameItems, addGameItem };
+  function chooseOption(item, option) {
+    const selectedTruth = {
+      id: item.id,
+      text: item.text + option.text,
+    };
+
+    setTruths((truths) => [...truths, selectedTruth]);
+    next(item);
+  }
+
+  const values = { gameItems, setGameItems, next, chooseOption, truths };
 
   return (
     <GamesContext.Provider value={values}>{children}</GamesContext.Provider>
   );
 }
-
-export const itemStructure = {
-  rules: [
-    {
-      id: 0,
-      type: 'rules',
-      text: 'Read the Intro at loud.',
-      helpText: 'Tap on the last box to proceed.',
-      next: 'intro',
-    },
-    {
-      id: 1,
-      type: 'rules',
-      text: 'Then choose your Truths from the corresponding sheet among the presented options to paint up the broad strokes of your world.',
-      next: 'truth',
-    },
-  ],
-  intro: [
-    {
-      id: 0,
-      type: 'intro',
-      text: 'The Lich once deceived Death and gained immortality, and she has been trying to end him ever since. He succeeded in banning her physical form from his Domain, a wicked land being shaped by his image generation after another.',
-      next: 'intro',
-    },
-    {
-      id: 1,
-      type: 'intro',
-      text: 'Keeping Death herself at bay, however, requires paying a price that keeps getting higher and higher, and even his peak mastery of the Dark Arts is proving insufficient. The Lich is now closer than ever to losing this strongarm with Death and his life with it.',
-      next: 'intro',
-    },
-    {
-      id: 2,
-      type: 'intro',
-      text: 'The Lich has many subjects, but you only are his chosen Servants, scourged not by Death but by the lack of her, wickedly corrupted by the Lich’s Domain. You, and no one else, are bound to assist him in his quest to beat Death once more. You’re bound to him because he keeps your souls enchained.',
-      next: 'rules',
-    },
-  ],
-};
