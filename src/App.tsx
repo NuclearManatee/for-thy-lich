@@ -51,13 +51,15 @@ function Home() {
         an indie tabletop roleplaying game about being tied to an undead
         disgraced tyrant.
       </p>
-      <p><Link to={'/game'}>Start Game</Link></p>
+      <p>
+        <Link to={'/game'}>Start Game</Link>
+      </p>
     </>
   );
 }
 
 function ErrorPage() {
-  retunr(
+  return (
     <>
       <h1>Page Not Found</h1>
       <p>You might want to start again from the home page.</p>

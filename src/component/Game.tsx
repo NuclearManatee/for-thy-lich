@@ -1,14 +1,13 @@
 import * as React from 'react';
 import { useState, useContext } from 'react';
 import { GamesContext, GamesDispatchContext } from '../lib';
+import ListItem from './listItem';
 
 export default function Game() {
   const { gameItems, addGameItem } = useContext(GamesContext);
   const dispatch = useContext(GamesDispatchContext);
 
   function GameItem(game) {
-    console.log(game.game.text);
-
     function next(game) {
       console.log(game.game.id);
 
@@ -28,8 +27,8 @@ export default function Game() {
 
   return (
     <>
-      {games.map((gameItem) => (
-        <GameItem key={gameItem.id} game={gameItem} dispatch={dispatch} />
+      {gameItems.map((gameItem) => (
+        <ListItem key={gameItem.id} listItem={gameItem} />
       ))}
     </>
   );
