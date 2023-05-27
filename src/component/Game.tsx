@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useContext } from 'react';
-import { GamesContext } from '../lib';
+import { GamesContext, itemStructure } from '../lib';
 import ListItem from './listItem';
 
 export default function Game() {

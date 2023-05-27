@@ -50,10 +50,10 @@ const itemStructure = {
       next: 'rules',
     },
     {
-      id: 7,
+      id: 8,
       type: 'rules',
       text: 'Whoever wants to can start with the first question. During each player’s first turn, they must also give their character a name.',
-      next: 'question',
+      next: 'startQuestions',
     },
   ],
   intro: [
@@ -391,6 +391,86 @@ const itemStructure = {
       next: 'rules',
     },
   ],
+  question: {
+    knowledge: {
+      description: 'This Path is about knowledge, lost or forgotten.',
+      arrow: 'Stay on this Path if knowledge is beyond your reach.',
+      questions: [
+        {
+          id: 1,
+          type: 'knowledge',
+          text: 'The Lich once held the most powerful dark art of the land, but the Death got hold of it. What’s your part in it?',
+          switch: 'secrets',
+        },
+        {
+          id: 2,
+          type: 'knowledge',
+          text: 'One of your ancestors served the Lich. How did they become their favorite?',
+          switch: 'mortals',
+        },
+      ],
+    },
+    mortals: {
+      description: 'This Path is about the bonds with the living.',
+      arrow: 'Stay on this Path if the Lich becomes closer to the living.',
+      questions: [
+        {
+          id: 1,
+          type: 'mortals',
+          text: 'The Lich took your soul because of your humanity, somehow. Do you still feel like that?',
+          switch: 'desires',
+        },
+      ],
+    },
+    undeath: {
+      description: 'This Path is about the bonds with the living.',
+      arrow: 'Stay on this Path if the Lich becomes closer to the living.',
+      questions: [
+        {
+          id: 1,
+          type: 'mortals',
+          text: 'The Lich took your soul because of your humanity, somehow. Do you still feel like that?',
+          switch: 'desires',
+        },
+      ],
+    },
+    decay: {
+      description: 'This Path is about the bonds with the living.',
+      arrow: 'Stay on this Path if the Lich becomes closer to the living.',
+      questions: [
+        {
+          id: 1,
+          type: 'mortals',
+          text: 'The Lich took your soul because of your humanity, somehow. Do you still feel like that?',
+          switch: 'desires',
+        },
+      ],
+    },
+    secrets: {
+      description: 'This Path is about the bonds with the living.',
+      arrow: 'Stay on this Path if the Lich becomes closer to the living.',
+      questions: [
+        {
+          id: 1,
+          type: 'mortals',
+          text: 'The Lich took your soul because of your humanity, somehow. Do you still feel like that?',
+          switch: 'desires',
+        },
+      ],
+    },
+    desires: {
+      description: 'This Path is about the bonds with the living.',
+      arrow: 'Stay on this Path if the Lich becomes closer to the living.',
+      questions: [
+        {
+          id: 1,
+          type: 'mortals',
+          text: 'The Lich took your soul because of your humanity, somehow. Do you still feel like that?',
+          switch: 'desires',
+        },
+      ],
+    },
+  },
 };
 
 export default itemStructure;
