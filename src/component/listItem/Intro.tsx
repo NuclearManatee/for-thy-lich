@@ -1,6 +1,6 @@
-import * from React;
+import * as React from React;
 
-export default Intro({item}){
+export default function Intro({item}){
   return(
     <>
     <div>
