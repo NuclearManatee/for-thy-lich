@@ -3,7 +3,7 @@ import { useState, useContext } from 'react';
 import { GamesContext, GamesDispatchContext } from '../lib';
 
 export default function Game() {
-  const games = useContext(GamesContext);
+  const { gameItems, addGameItem } = useContext(GamesContext);
   const dispatch = useContext(GamesDispatchContext);
 
   function GameItem(game) {
@@ -12,12 +12,8 @@ export default function Game() {
     function next(game) {
       console.log(game.game.id);
 
-      if (game.game.id == games.length - 1) {
-        dispatch({
-          type: 'added',
-          id: game.game.id++,
-          text: 'lallero',
-        });
+      if (game.game.id == gameItems.length - 1) {
+        addGameItem(game);
       } else {
         return;
       }
