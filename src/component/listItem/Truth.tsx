@@ -1,7 +1,4 @@
-import * as React from React;
-
-export default function Component({item}){
-  return(
-    {JSON.stringify(item)};
-  )
+import * as React from 'react';
+export default function Component({ item }) {
+  return <>a</>;
 }
