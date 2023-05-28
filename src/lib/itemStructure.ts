@@ -17,7 +17,7 @@ const itemStructure = {
     {
       id: 2,
       type: 'rules',
-      text: 'You will be propted Questions from different Patths. Taking turns, read it aloud, interpert it, and answer it however you wish.',
+      text: 'You will be propted Questions from different Paths. Taking turns, read it aloud, interpert it, and answer it however you wish.',
       next: 'rules',
     },
     {
