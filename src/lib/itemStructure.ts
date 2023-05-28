@@ -10,13 +10,13 @@ const itemStructure = {
     {
       id: 1,
       type: 'rules',
-      text: 'Then choose your Truths from the corresponding sheet among the presented options to paint up the broad strokes of your world.',
+      text: 'Choose your Truths from the corresponding sheet among the presented options to paint up the broad strokes of your world.',
       next: 'truth',
     },
     {
       id: 2,
       type: 'rules',
-      text: 'Choose a Path to start with. Taking turns, pick the first unread question from the top and read it aloud. Interpret these questions, and answer them however you wish.',
+      text: 'You will be propted Questions from different Patths. Taking turns, read it aloud, interpert it, and answer it however you wish.',
       next: 'rules',
     },
     {
@@ -40,17 +40,11 @@ const itemStructure = {
     {
       id: 6,
       type: 'rules',
-      text: 'Continue to answer questions, remove them, pass them, go further in the Paths or switch according to the Arrows until you reach a Path’s Final Question, which must be answered by every player, however they wish.',
+      text: 'Continue to answer questions, remove them, pass them, go further in the Paths or switch according to the Arrows until you reach a Path’s Final Question.',
       next: 'rules',
     },
     {
       id: 7,
-      type: 'rules',
-      text: 'Then, go to the Aftermath and choose whether to continue the game or play Lich’s demise. In this last occurrence, the Closing Question should be answered by every player before ending the game.',
-      next: 'rules',
-    },
-    {
-      id: 8,
       type: 'rules',
       text: 'Whoever wants to can start with the first question. During each player’s first turn, they must also give their character a name.',
       next: 'startQuestions',
@@ -74,6 +68,27 @@ const itemStructure = {
       type: 'intro',
       text: 'The Lich has many subjects, but you only are his chosen Servants, scourged not by Death but by the lack of her, wickedly corrupted by the Lich’s Domain. You, and no one else, are bound to assist him in his quest to beat Death once more. You’re bound to him because he keeps your souls enchained.',
       next: 'rules',
+    },
+    {
+      id: 3,
+      type: 'intro',
+      text: 'While the Lich starts to crumble to dust, the sky splits open, and the figure of Death looms over the Domain. You can feel your soul’s shackles loosen while his immortal reign finally comes to an end.',
+      next: 'intro',
+    },
+    {
+      id: 4,
+      type: 'intro',
+      text: 'What is the first thing you will do now that your soul is finally free?',
+      helpText: 'Each player must answer, however they wish.',
+      next: 'intro',
+    },
+    {
+      id: 5,
+      type: 'intro',
+      text: 'Thank you for playing For Thy Lich!',
+      helpText:
+        'If you have any questions or feedbacks, please reach to anuclearmanatee@gmail.com.',
+      next: 'intro',
     },
   ],
   truth: [
@@ -398,15 +413,52 @@ const itemStructure = {
       questions: [
         {
           id: 1,
-          type: 'knowledge',
+          type: 'question',
+          path: 'knowledge',
           text: 'The Lich once held the most powerful dark art of the land, but the Death got hold of it. What’s your part in it?',
           switch: 'secrets',
         },
         {
           id: 2,
-          type: 'knowledge',
+          type: 'question',
+          path: 'knowledge',
           text: 'One of your ancestors served the Lich. How did they become their favorite?',
           switch: 'mortals',
+        },
+        {
+          id: 3,
+          type: 'question',
+          path: 'knowledge',
+          text: 'You assisted the Lich in extending his immortality last time, but it won’t work a second. What’s your part in it?',
+          switch: 'decay',
+        },
+        {
+          id: 4,
+          type: 'question',
+          path: 'knowledge',
+          text: 'The Domain holds something more powerful than the Lich. What happened when you tried to tap into it?',
+          switch: 'undeath',
+        },
+        {
+          id: 5,
+          type: 'question',
+          path: 'knowledge',
+          text: 'The routine weaved together to preserve the Lich sanity starts to untie. How is it connected to your role in the routine?',
+          switch: 'desires',
+        },
+        {
+          id: 6,
+          type: 'question',
+          path: 'knowledge',
+          text: ' You catch a glimpse of a dark truth about life behind the veil of death. How does it shatter a foundation of human values? Do you believe it?',
+          switch: 'mortals',
+        },
+        {
+          id: 7,
+          type: 'question',
+          final: true,
+          path: 'knowledge',
+          text: 'The Lich forgot about his own Title of Power. Do you remind him who he is?',
         },
       ],
     },
@@ -416,7 +468,8 @@ const itemStructure = {
       questions: [
         {
           id: 1,
-          type: 'mortals',
+          type: 'question',
+          path: 'mortals',
           text: 'The Lich took your soul because of your humanity, somehow. Do you still feel like that?',
           switch: 'desires',
         },
@@ -428,9 +481,17 @@ const itemStructure = {
       questions: [
         {
           id: 1,
-          type: 'mortals',
+          type: 'question',
+          path: 'undeath',
           text: 'The Lich took your soul because of your humanity, somehow. Do you still feel like that?',
           switch: 'desires',
+        },
+        {
+          id: 2,
+          type: 'question',
+          path: 'undeath',
+          text: 'Once the Lich brought back from the dead someone you hate. How will you take care of it?',
+          switch: 'mortals',
         },
       ],
     },
@@ -440,8 +501,16 @@ const itemStructure = {
       questions: [
         {
           id: 1,
-          type: 'mortals',
+          type: 'question',
+          path: 'decay',
           text: 'The Lich took your soul because of your humanity, somehow. Do you still feel like that?',
+          switch: 'desires',
+        },
+        {
+          id: 2,
+          type: 'question',
+          path: 'decay',
+          text: 'The ranks of Servants were once more numerous. What thinned your ranks?',
           switch: 'desires',
         },
       ],
@@ -452,9 +521,17 @@ const itemStructure = {
       questions: [
         {
           id: 1,
-          type: 'mortals',
-          text: 'The Lich took your soul because of your humanity, somehow. Do you still feel like that?',
-          switch: 'desires',
+          type: 'question',
+          path: 'secrets',
+          text: 'In addition to the Lich, there is someone else who can give you orders. Why is it difficult for you to refuse them?',
+          switch: 'undeath',
+        },
+        {
+          id: 2,
+          type: 'question',
+          path: 'secrets',
+          text: 'You have seen the Lich commit an unmistakably good deed. What keeps him from repeating it?',
+          switch: 'decay',
         },
       ],
     },
@@ -464,9 +541,17 @@ const itemStructure = {
       questions: [
         {
           id: 1,
-          type: 'mortals',
-          text: 'The Lich took your soul because of your humanity, somehow. Do you still feel like that?',
-          switch: 'desires',
+          type: 'question',
+          path: 'desires',
+          text: 'The Lich promised you something in exchange for your soul. Was it really what you wanted?',
+          switch: 'undeath',
+        },
+        {
+          id: 2,
+          type: 'question',
+          path: 'desires',
+          text: 'What did Death reveal to you to persuade you to serve her?',
+          switch: 'knowledge',
         },
       ],
     },

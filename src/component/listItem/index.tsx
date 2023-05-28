@@ -17,8 +17,6 @@ export default function ListItem({ listItem }) {
       return <ChooseYourName />;
     case 'question':
       return <Question item={listItem} />;
-    case 'finalQuestion':
-      return <FinalQuestion item={listItem} />;
     default:
       return <div>Unknown Type</div>;
   }

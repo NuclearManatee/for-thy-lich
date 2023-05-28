@@ -12,27 +12,32 @@ export function GameProvider({ children }) {
 
   const [truths, setTruths] = useState([]);
 
-  function next(item) {
+  function next(nextItem) {
     console.log('clicked');
 
-    if (item.next == 'startQuestions') {
+    if (nextItem == 'startQuestions') {
       const pathList = [];
       for (const key in itemStructure.question) {
         if (typeof itemStructure.question[key] === 'object') {
           pathList.push(key);
         }
       }
-      nextQuestion(pathList[Math.floor(Math.random() * pathList.length)]);
+      const initialPath = pathList[Math.floor(Math.random() * pathList.length)];
+
+      console.log(`STARTQUESTION initialPath is ${initialPath} `);
+
+      nextQuestion(initialPath);
     } else {
-    
       const nextIndex = gameItems.filter(
-        (thisItem) => thisItem.type == item.next
+        (thisItem) => thisItem.type == nextItem
       ).length;
 
+      console.log(`NEXT next is ${nextItem} and nextIndex is ${nextIndex} `);
+
       const toInsert =
-        itemStructure[item.next].filter((thisItem) => thisItem.id == nextIndex)
+        itemStructure[nextItem].filter((thisItem) => thisItem.id == nextIndex)
           .length > 0
-          ? itemStructure[item.next].filter(
+          ? itemStructure[nextItem].filter(
               (thisItem) => thisItem.id == nextIndex
             )[0]
           : null;
@@ -53,21 +58,26 @@ export function GameProvider({ children }) {
 
     setTruths((truths) => [...truths, selectedTruth]);
 
-    
-      next(item);
-    }
+    next(item.next);
+  }
 
+  function nextQuestion(nextPath) {
+    console.log(nextPath);
 
-  function nextQuestion(next) {
-    const nextIndex = gameItems.filter(
-      (thisItem) => thisItem.type == next
-    ).length;
+    const nextIndex =
+      gameItems
+        .filter((thisItem) => thisItem.type == 'question')
+        .filter((thisItem) => thisItem.path == nextPath).length + 1;
+
+    console.log(
+      `NEXTQUESTION nextPath is ${nextPath} and nextIndex is ${nextIndex} `
+    );
 
     const nextQuestion =
-      itemStructure.question[next].questions.filter(
+      itemStructure.question[nextPath].questions.filter(
         (thisItem) => thisItem.id == nextIndex
       ).length > 0
-        ? itemStructure.question[next].questions.filter(
+        ? itemStructure.question[nextPath].questions.filter(
             (thisItem) => thisItem.id == nextIndex
           )[0]
         : null;
