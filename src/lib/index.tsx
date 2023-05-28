@@ -1,7 +1,4 @@
-import {
-  GamesContext,
-  GamesDispatchContext,
-  GameProvider,
-} from './GameContext';
+import { GamesContext, GameProvider } from './GameContext';
+import itemStructure from './itemStructure';
 
-export { GamesContext, GamesDispatchContext, GameProvider };
+export { GamesContext, GameProvider, itemStructure };
