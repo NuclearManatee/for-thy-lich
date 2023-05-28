@@ -48,6 +48,8 @@ export function GameProvider({ children }) {
         return;
       }
     }
+
+    scrollToBottom();
   }
 
   function chooseOption(item, option) {
@@ -87,7 +89,10 @@ export function GameProvider({ children }) {
     } else {
       return;
     }
+    scrollToBottom();
   }
+
+  function scrollToBottom() {}
 
   const values = {
     gameItems,

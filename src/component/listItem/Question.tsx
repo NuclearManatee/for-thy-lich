@@ -16,10 +16,10 @@ function Question({ item }) {
     <div>
       <p>{item.text}</p>
       <p onClick={() => nextQuestion(item.path)}>
-        {itemStructure.question[item.path].arrow}
+        <u>{itemStructure.question[item.path].arrow}</u>
       </p>
       <p onClick={() => nextQuestion(item.switch)}>
-        Otherwise switch to {item.switch}.
+        <u>Otherwise switch to {item.switch}.</u>
       </p>
     </div>
   );
@@ -37,11 +37,11 @@ function FinalQuestion({ item }) {
         <i>Each player need to answer this, however they wish.</i>
       </p>
       <p onClick={() => next('intro')}>
-        Decide as a group if this will end your game.
+        <u>Decide as a group if this will end your game.</u>
       </p>
       <p onClick={() => next('startQuestions')}>
-        Otherwise, the Lich overcome the trials one more. Click here to go to
-        the next question.
+        <u>Otherwise, the Lich overcome the trials one more. Click here to go to
+        the next question.</u>
       </p>
     </div>
   );
