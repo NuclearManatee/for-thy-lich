@@ -13,7 +13,7 @@ function Question({ item }) {
   const { nextQuestion } = useContext(GamesContext);
 
   return (
-    <div>
+    <div className="gameListItem">
       <p>{item.text}</p>
       <p onClick={() => nextQuestion(item.path)}>
         <u>{itemStructure.question[item.path].arrow}</u>
