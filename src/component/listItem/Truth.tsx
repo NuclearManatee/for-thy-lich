@@ -11,11 +11,11 @@ export default function Component({ item }) {
   return (
     <>
       {selectedTruth ? (
-        <div>
+        <div className="gameListItem">
           <p>{selectedTruth.text}</p>
         </div>
       ) : (
-        <div>
+        <div className="gameListItem">
           {item.helpText && (
             <p>
               <i>{item.helpText}</i>
