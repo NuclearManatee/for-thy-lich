@@ -3,8 +3,17 @@ p {
   font-family: Lato;
 }
 
-div {
+h1 {
+  font-size: 2rem;
+}
+
+.gameListItem {
   margin: 0;
+  margin-bottom: 1rem;
   padding: 1rem;
-  border: 1px black;
+  border: 1px black solid;
+}
+
+.gameListContainer {
+  overflow-y: auto;
 }

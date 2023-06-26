@@ -13,7 +13,7 @@ function Question({ item }) {
   const { nextQuestion } = useContext(GamesContext);
 
   return (
-    <div>
+    <div className="gameListItem">
       <p>{item.text}</p>
       <p onClick={() => nextQuestion(item.path)}>
         <u>{itemStructure.question[item.path].arrow}</u>
@@ -29,7 +29,7 @@ function FinalQuestion({ item }) {
   const { next } = useContext(GamesContext);
 
   return (
-    <div>
+    <div className="gameListItem">
       <p>
         <b>{item.text}</b>
       </p>
@@ -40,8 +40,10 @@ function FinalQuestion({ item }) {
         <u>Decide as a group if this will end your game.</u>
       </p>
       <p onClick={() => next('startQuestions')}>
-        <u>Otherwise, the Lich overcome the trials one more. Click here to go to
-        the next question.</u>
+        <u>
+          Otherwise, the Lich overcome the trials one more. Click here to go to
+          the next question.
+        </u>
       </p>
     </div>
   );

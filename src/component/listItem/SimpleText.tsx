@@ -6,7 +6,7 @@ export default function SimpleText({ item }) {
   const { next } = useContext(GamesContext);
 
   return (
-    <div onClick={() => next(item.next)}>
+    <div className="gameListItem" onClick={() => next(item.next)}>
       <p>{item.text}</p>
       {item.helpText && (
         <p>

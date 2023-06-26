@@ -4,17 +4,16 @@ import { GamesContext, itemStructure } from '../lib';
 import ListItem from './listItem';
 
 export default function Game() {
-  const { gameItems } = useContext(GamesContext);
+  const { gameItems, containerRef } = useContext(GamesContext);
 
   return (
-    <>
+    <div className="gameListContainer">
       {gameItems.map((gameItem, key) => {
         return (
-          <>
-            <ListItem key={gameItem.type + gameItem.id} listItem={gameItem} />
-          </>
+          <ListItem key={gameItem.type + gameItem.id} listItem={gameItem} />
         );
       })}
-    </>
+      <div ref={containerRef} className="gameListEndElement"></div>
+    </div>
   );
 }

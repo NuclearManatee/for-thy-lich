@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { createContext, useState } from 'react';
+import { createContext, useState, useEffect, useRef } from 'react';
 import itemStructure from './itemStructure';
 
 export const GamesContext = createContext(null);
@@ -11,6 +11,15 @@ export function GameProvider({ children }) {
   ]);
 
   const [truths, setTruths] = useState([]);
+
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    if (containerRef.current) {
+      console.log('scrolled');
+      containerRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [gameItems]);
 
   function next(nextItem) {
     console.log('clicked');
@@ -48,8 +57,6 @@ export function GameProvider({ children }) {
         return;
       }
     }
-
-    scrollToBottom();
   }
 
   function chooseOption(item, option) {
@@ -89,10 +96,7 @@ export function GameProvider({ children }) {
     } else {
       return;
     }
-    scrollToBottom();
   }
-
-  function scrollToBottom() {}
 
   const values = {
     gameItems,
@@ -101,6 +105,7 @@ export function GameProvider({ children }) {
     chooseOption,
     truths,
     nextQuestion,
+    containerRef,
   };
 
   return (
