@@ -17,3 +17,13 @@ h1 {
 .gameListContainer {
   overflow-y: auto;
 }
+
+.header-container {
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+}
+
+.body-container {
+  padding-top: 5rem;
+}

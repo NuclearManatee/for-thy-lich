@@ -3,22 +3,20 @@ import { useContext } from 'react';
 import { GamesContext, itemStructure } from '../../lib';
 
 export default function QuestionWrapper({ item }) {
-  const { nextQuestion } = useContext(GamesContext);
-
   if (item.final) return <FinalQuestion item={item} />;
   else return <Question item={item} />;
 }
 
 function Question({ item }) {
-  const { nextQuestion } = useContext(GamesContext);
+  const { next } = useContext(GamesContext);
 
   return (
     <div className="gameListItem">
       <p>{item.text}</p>
-      <p onClick={() => nextQuestion(item.path)}>
+      <p onClick={() => next('question', item.path)}>
         <u>{itemStructure.question[item.path].arrow}</u>
       </p>
-      <p onClick={() => nextQuestion(item.switch)}>
+      <p onClick={() => next('question', item.switch)}>
         <u>Otherwise switch to {item.switch}.</u>
       </p>
     </div>

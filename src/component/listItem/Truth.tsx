@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useContext } from 'react';
 import { GamesContext } from '../../lib';
 
-export default function Component({ item }) {
+export default function Truth({ item }) {
   const { chooseOption, truths } = useContext(GamesContext);
 
   const filteredTruth = truths.filter((truth) => truth.id == item.id);
@@ -26,9 +26,11 @@ export default function Component({ item }) {
             {item.options.map((option, key) => {
               return (
                 <>
-                  <li onClick={() => chooseOption(item, option)}>
-                    {option.text}
-                  </li>
+                  <div key={key}>
+                    <li onClick={() => chooseOption(item, option)}>
+                      {option.text}
+                    </li>
+                  </div>
                 </>
               );
             })}

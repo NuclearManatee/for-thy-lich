@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Game } from './component';
+import { Game, Header } from './component';
 import { GameProvider } from './lib';
 import { createBrowserRouter, RouterProvider, Link } from 'react-router-dom';
 
@@ -11,7 +11,9 @@ export default function GameApp() {
       element: (
         <>
           <Header />
-          <Home />
+          <div className="body-container">
+            <Home />
+          </div>
         </>
       ),
     },
@@ -20,7 +22,9 @@ export default function GameApp() {
       element: (
         <>
           <Header />
-          <Game />
+          <div className="body-container">
+            <Game />
+          </div>
         </>
       ),
       errorElement: <ErrorPage />,
@@ -31,16 +35,6 @@ export default function GameApp() {
     <GameProvider>
       <RouterProvider router={router} />
     </GameProvider>
-  );
-}
-
-function Header() {
-  return (
-    <>
-      <Link to={'/'}>
-        <h1>For Thy Lich</h1>
-      </Link>
-    </>
   );
 }
 

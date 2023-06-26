@@ -11,37 +11,63 @@ export function GameProvider({ children }) {
   ]);
 
   const [truths, setTruths] = useState([]);
+  const numberOfTruth = 12;
 
-  const containerRef = useRef(null);
+  const [bookMarks, setBookMarks] = useState([
+    {
+      symbol: 'T',
+      type: 'truths',
+    },
+  ]);
+
+  const endOfListRef = useRef(null);
+  const truthsRef = useRef(null);
 
   useEffect(() => {
-    if (containerRef.current) {
-      console.log('scrolled');
-      containerRef.current.scrollIntoView({ behavior: 'smooth' });
+    if (endOfListRef.current) {
+      endOfListRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   }, [gameItems]);
 
-  function next(nextItem) {
-    console.log('clicked');
+  useEffect(() => {
+    if (truths.length === numberOfTruth) {
+      const truthsItem = {
+        symbol: 'T',
+        type: 'truths',
+        ref: truthsRef,
+      };
 
-    if (nextItem == 'startQuestions') {
-      const pathList = [];
-      for (const key in itemStructure.question) {
-        if (typeof itemStructure.question[key] === 'object') {
-          pathList.push(key);
-        }
+      setGameItems((items) =>
+        items.toSpliced(
+          gameItems.findIndex((item) => item.type == 'truth'),
+          numberOfTruth,
+          truthsItem
+        )
+      );
+
+      setBookMarks((refs) => [...refs, truthsItem]);
+    }
+  }, [truths]);
+
+  function randomQuestionsPath() {
+    const pathList = [];
+    for (const key in itemStructure.question) {
+      if (typeof itemStructure.question[key] === 'object') {
+        pathList.push(key);
       }
-      const initialPath = pathList[Math.floor(Math.random() * pathList.length)];
+    }
+    return pathList[Math.floor(Math.random() * pathList.length)];
+  }
 
-      console.log(`STARTQUESTION initialPath is ${initialPath} `);
-
-      nextQuestion(initialPath);
-    } else {
+  function next(nextItem, questionPath?: string) {
+    if (nextItem == 'startQuestions') nextQuestion(randomQuestionsPath());
+    else if (nextItem == 'question') nextQuestion(questionPath);
+    else {
       const nextIndex = gameItems.filter(
         (thisItem) => thisItem.type == nextItem
       ).length;
 
-      console.log(`NEXT next is ${nextItem} and nextIndex is ${nextIndex} `);
+      //console.log(`NEXT next is ${nextItem} and nextIndex is ${nextIndex} `);
 
       const toInsert =
         itemStructure[nextItem].filter((thisItem) => thisItem.id == nextIndex)
@@ -59,28 +85,13 @@ export function GameProvider({ children }) {
     }
   }
 
-  function chooseOption(item, option) {
-    const selectedTruth = {
-      id: item.id,
-      text: item.text + option.text,
-    };
-
-    setTruths((truths) => [...truths, selectedTruth]);
-
-    next(item.next);
-  }
-
   function nextQuestion(nextPath) {
-    console.log(nextPath);
+    //console.log(nextPath);
 
     const nextIndex =
       gameItems
         .filter((thisItem) => thisItem.type == 'question')
         .filter((thisItem) => thisItem.path == nextPath).length + 1;
-
-    console.log(
-      `NEXTQUESTION nextPath is ${nextPath} and nextIndex is ${nextIndex} `
-    );
 
     const nextQuestion =
       itemStructure.question[nextPath].questions.filter(
@@ -98,14 +109,27 @@ export function GameProvider({ children }) {
     }
   }
 
+  function chooseOption(item, option) {
+    const selectedTruth = {
+      id: item.id,
+      text: item.text + option.text,
+    };
+
+    setTruths((truths) => [...truths, selectedTruth]);
+
+    next(item.next);
+  }
+
   const values = {
     gameItems,
     setGameItems,
+    randomQuestionsPath,
     next,
     chooseOption,
     truths,
     nextQuestion,
-    containerRef,
+    endOfListRef,
+    bookMarks,
   };
 
   return (

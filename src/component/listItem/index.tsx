@@ -1,9 +1,9 @@
 import * as React from 'react';
 import SimpleText from './SimpleText';
 import Truth from './Truth';
+import Truths from './Truths';
 import ChooseYourName from './ChooseYourName';
 import Question from './Question';
-import FinalQuestion from './FinalQuestion';
 
 export default function ListItem({ listItem }) {
   switch (listItem.type) {
@@ -13,6 +13,8 @@ export default function ListItem({ listItem }) {
       return <SimpleText item={listItem} />;
     case 'truth':
       return <Truth item={listItem} />;
+    case 'truths':
+      return <Truths />;
     case 'chooseYourName':
       return <ChooseYourName />;
     case 'question':
