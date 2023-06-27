@@ -16,6 +16,7 @@ h1 {
 
 .gameListContainer {
   overflow-y: auto;
+  scroll-padding-top: 5rem;
 }
 
 .header-container {

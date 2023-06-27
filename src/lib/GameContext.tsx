@@ -13,12 +13,7 @@ export function GameProvider({ children }) {
   const [truths, setTruths] = useState([]);
   const numberOfTruth = 12;
 
-  const [bookMarks, setBookMarks] = useState([
-    {
-      symbol: 'T',
-      type: 'truths',
-    },
-  ]);
+  const [bookMarks, setBookMarks] = useState([]);
 
   const endOfListRef = useRef(null);
   const truthsRef = useRef(null);

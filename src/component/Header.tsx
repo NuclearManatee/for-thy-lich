@@ -16,11 +16,23 @@ export default function Header() {
         </div>
       </Link>
       <div>
-
-      {location.pathname === '/game' && 'aaaa' }
         {location.pathname === '/game' &&
           bookMarks.map((bookMark, key) => {
-            <span key={key}>{bookMark.symbol} |</span>;
+            return (
+              <span
+                key={key}
+                onClick={() => {
+                  if (bookMark.ref.current)
+                    bookMark.ref.current.scrollIntoView({
+                      behavior: 'smooth',
+                      block: 'center',
+                      inline: 'center',
+                    });
+                }}
+              >
+                {bookMark.symbol} |
+              </span>
+            );
           })}
       </div>
     </div>
